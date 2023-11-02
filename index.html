@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ivy Streams</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body>
+    <button id="join-btn">Join Stream</button>
+
+    <div id="stream-wrapper">
+      <div id="video-streams"></div>
+
+      <div id="stream-controls">
+        <button id="leave-btn">Leave Stream</button>
+        <button id="mic-btn">Mic On</button>
+        <button id="camera-btn">Camera on</button>
+        <button type="button" id="inItScreen">Share Screen</button>
+        <br /><label>Local Audio Level: </label>
+        <input type="range" id="localAudioVolume" max="100" step="1" />
+        <br />
+        <label>Remote Audio Level</label>
+        <input type="range" id="remoteAudioVolume" max="100" step="1" />
+      </div>
+    </div>
+
+    <button id="join-btn-1">Join Stream</button>
+
+    <div id="stream-wrapper-1">
+      <div id="video-streams-1"></div>
+
+      <div id="stream-controls-1">
+        <button id="leave-btn-1">Leave Stream</button>
+        <button id="mic-btn-1">Mic On</button>
+        <button id="camera-btn-1">Camera on</button>
+      </div>
+    </div>
+  </body>
+  <!-- <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script> -->
+  <script src="AgoraRTC_N-4.7.3.js"></script>
+  <script src="main.js"></script>
+</html>
