@@ -20,7 +20,7 @@ let joinAndDisplayLocalStream = async () => {
 
   let player = `<div class="video-container" id="user-container-${UID1}">
                         <div class="video-player" id="user-${UID1}"></div>
-                  </div>`;
+                </div>`;
   document
     .getElementById("video-streams")
     .insertAdjacentHTML("beforeend", player);
@@ -142,7 +142,7 @@ let joinAndDisplayLocalStream2 = async () => {
 
   hihihi.play(`user-${UID2}`);
 
-  await client2.publish([hihihi, localTracks2[1]]);
+  await client2.publish([hihihi]);
 };
 
 let joinStream2 = async () => {
@@ -172,6 +172,11 @@ let screenSharingTrack = null;
 
 document.getElementById("inItScreen").onclick = async function () {
   if (isSharingEnabled === false) {
+    // Stop the default screen sharing track (if it exists)
+    if (screenSharingTrack) {
+      screenSharingTrack.stop();
+    }
+
     screenSharingTrack = await AgoraRTC.createScreenVideoTrack();
 
     document.getElementById(`inItScreen`).innerHTML = "Stop Sharing";
@@ -182,11 +187,17 @@ document.getElementById("inItScreen").onclick = async function () {
 
     screenSharingTrack.play(`user-${UID1}`);
 
-    await client.publish([screenSharingTrack, localTracks[1]]);
+    await client.unpublish([localTracks[0], localTracks[1]]);
+
+    await client.publish([localTracks[0], screenSharingTrack]);
   } else {
+    screenSharingTrack.stop();
+
     document.getElementById(`user-${UID1}`).innerHTML = "";
 
     localTracks[1].play(`user-${UID1}`);
+
+    await client.publish([localTracks[0], screenSharingTrack]);
 
     await client.publish([localTracks[0], localTracks[1]]);
 
@@ -207,5 +218,3 @@ document
   .addEventListener("change", function (event) {
     client.remoteAudioTracks.setVolume(parseInt(event.target.value));
   });
-
-document.get;
